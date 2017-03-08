@@ -40,5 +40,19 @@ db.knex.schema.hasTable('clicks').then(function(exists) {
 // Add additional schema definitions below
 /************************************************************/
 
+//JESSE CHANGE #1 : below I am adding a users table
+// with columns for username and password
+
+db.knex.schema.hasTable('users').then(function(exists) {
+  if (!exists) {
+    db.knex.schema.createTable('users', function (user) {
+      user.increments('id').primary();
+      user.string('username').unique();
+      user.string('password');
+    }).then(function (table) {
+      console.log('Created Table', table);
+    });
+  }
+});
 
 module.exports = db;
